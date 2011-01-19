@@ -40,7 +40,7 @@ class Gravatar(object):
         # make sure options are valid
         if self.rating.lower() not in RATINGS:
             raise InvalidRatingError(self.rating)
-        if self.size > MAX_SIZE or self.size < MIN_SIZE:
+        if not (MIN_SIZE <= self.size <= MAX_SIZE):
             raise InvalidSizeError(self.size)
         
         url = ''
