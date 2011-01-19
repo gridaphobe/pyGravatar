@@ -1,5 +1,9 @@
-"""Python module for interacting with Gravatar
 """
+Python module for interacting with Gravatar.
+"""
+__author__  = 'Eric Seidel'
+__version__ = '0.0.1'
+__email__   = 'gridaphobe@gmail.com'
 
 from urllib import urlencode
 from urllib2 import urlopen
@@ -16,21 +20,23 @@ DEFAULTS        = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro']
 
 class Gravatar(object):
     """
-    Represents a Gravatar user
+    Represents a Gravatar user.
     """
     
     def __init__(self, email, secure = False, rating = 'g', size = 80,
                  default = None):
-        self.email  = email
-        self.secure = secure
-        self.rating = rating
-        self.size   = size
-        self.default= default
-        self.url    = self.link_to_img()
-        self.profile= None
+        self._email_hash = md5(email.strip().lower()).hexdigest()
+        self.secure     = secure
+        self.rating     = rating
+        self.size       = size
+        self.default    = default
+        self.thumb      = self.link_to_img()
+        self.profile    = None
     
     def link_to_img(self):
-        """Generates a link to the user's Gravatar"""
+        """
+        Generates a link to the user's Gravatar.
+        """
         # make sure options are valid
         if self.rating.lower() not in RATINGS:
             raise InvalidRatingError(self.rating)
@@ -42,12 +48,11 @@ class Gravatar(object):
             url = SECURE_BASE_URL
         else:
             url = BASE_URL
-        
-        url += md5(self.email.strip().lower()).hexdigest()
+
         options = {'s' : self.size, 'r' : self.rating}
         if self.default is not None:
             options['d'] = self.default
-        url += '?' + urlencode(options)
+        url += self.hash + '?' + urlencode(options)
         return url
     
     def get_profile(self):
@@ -55,15 +60,20 @@ class Gravatar(object):
         Retrieves the profile data of the user and formats it as a
         Python dictionary.
         """
-        url = PROFILE_URL
-        url += md5(self.email.strip().lower()).hexdigest()
-        url += '.json'
+        url = PROFILE_URL + self.hash + '.json'
         profile = json.load(urlopen(url))
         # set the profile as an instance variable
         self.profile = profile['entry'][0]
     
     @property
-    def user_urls(self):
+    def hash(self):
+        """
+        Return email hash.
+        """
+        return self._email_hash
+
+    @property
+    def urls(self):
         """
         Return a list of user's urls.
         """
