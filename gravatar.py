@@ -29,6 +29,11 @@ class Gravatar(object):
         self.url    = self.link_to_img()
         self.profile= None
         
+    @secure.setter
+    def secure(self, value):
+        self.secure = value
+        self.url = self.link_to_img()
+    
     def link_to_img(self):
         """Generates a link to the user's Gravatar"""
         # make sure options are valid
