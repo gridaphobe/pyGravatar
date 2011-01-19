@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-
-from distutils.core import setup
+try:
+    from setuptools import setup
+except:
+    from distutils.core import setup
 
 setup(name='pyGravatar',
       version='0.0.1',
@@ -9,4 +11,6 @@ setup(name='pyGravatar',
       author_email='gridaphobe@gmail.com',
       url='http://bitbucket.org/gridaphobe/pyGravatar',
       py_modules=['gravatar'],
+      license='GPL',
+      keywords='gravatar',
       )
