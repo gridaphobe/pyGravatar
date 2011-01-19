@@ -15,7 +15,8 @@ MIN_SIZE        = 1
 DEFAULTS        = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro']
 
 class Gravatar(object):
-    """Represents a Gravatar user
+    """
+    Represents a Gravatar user
     """
     
     def __init__(self, email, secure = False, rating = 'g', size = 80,
@@ -50,7 +51,8 @@ class Gravatar(object):
         return url
     
     def get_profile(self):
-        """Retrieves the profile data of the user and formats it as a
+        """
+        Retrieves the profile data of the user and formats it as a
         Python dictionary.
         """
         url = PROFILE_URL
@@ -62,11 +64,56 @@ class Gravatar(object):
     
     @property
     def user_urls(self):
-        """Return a list of user's urls.
+        """
+        Return a list of user's urls.
         """
         if self.profile is None:
             self.get_profile()
         return self.profile['urls']
+    
+    @property
+    def accounts(self):
+        """
+        Return a list of user's linked accounts.
+        """
+        if self.profile is None:
+            self.get_profile()
+        return self.profile['accounts']
+    
+    @property
+    def verified_accounts(self):
+        """
+        Return a list of user's verified accounts.
+        """
+        return [a for a in self.accounts if a['verified'] == 'true']
+    
+    @property
+    def ims(self):
+        """
+        Return a list of user's IM accounts.
+        """
+        if self.profile is None:
+            self.get_profile()
+        return self.profile['accounts']
+    
+    @property
+    def photos(self):
+        """
+        Return a list of user's photos.
+        """
+        if self.profile is None:
+            self.get_profile()
+        return self.profile['photos']
+    
+    @property
+    def emails(self):
+        """
+        Return a list of user's emails.
+        """
+        if self.profile is None:
+            self.get_profile()
+        return self.profile['emails']
+
 
 class InvalidRatingError(Exception):
     def __init__(self, value):
