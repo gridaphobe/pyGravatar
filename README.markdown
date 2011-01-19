@@ -1,6 +1,6 @@
 # pyGravatar
 
-This is a Python interface to Gravatar[1]. It is very basic, but hopefully
+This is a Python interface to [Gravatar][1]. It is very basic, but hopefully
 will be helpful to some people.
 
 [1]: http://en.gravatar.com/
