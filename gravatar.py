@@ -113,9 +113,12 @@ class Gravatar(object):
         Python dictionary.
         """
         url = PROFILE_URL + self.hash + '.json'
-        profile = json.load(urlopen(url))
-        # set the profile as an instance variable
-        self._profile = profile['entry'][0]
+        try:
+            profile = json.load(urlopen(url))
+            # set the profile as an instance variable
+            self._profile = profile['entry'][0]
+        except:
+            self._profile = {}
     
     @property
     def hash(self):
@@ -138,14 +141,20 @@ class Gravatar(object):
         """
         Return a list of user's urls.
         """
-        return self.profile['urls']
+        try:
+            return self.profile['urls']
+        except KeyError:
+            return []
     
     @property
     def accounts(self):
         """
         Return a list of user's linked accounts.
         """
-        return self.profile['accounts']
+        try:
+            return self.profile['accounts']
+        except KeyError:
+            return []
     
     @property
     def verified_accounts(self):
@@ -159,21 +168,30 @@ class Gravatar(object):
         """
         Return a list of user's IM accounts.
         """
-        return self.profile['accounts']
+        try:
+            return self.profile['accounts']
+        except KeyError:
+            return []
     
     @property
     def photos(self):
         """
         Return a list of user's photos.
         """
-        return self.profile['photos']
+        try:
+            return self.profile['photos']
+        except KeyError:
+            return []
     
     @property
     def emails(self):
         """
         Return a list of user's emails.
         """
-        return self.profile['emails']
+        try:
+            return self.profile['emails']
+        except KeyError:
+            return []
 
 
 class InvalidRatingError(Exception):
