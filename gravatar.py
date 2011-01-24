@@ -2,7 +2,7 @@
 Python module for interacting with Gravatar.
 """
 __author__  = 'Eric Seidel'
-__version__ = '0.0.2'
+__version__ = '0.0.4'
 __email__   = 'gridaphobe@gmail.com'
 
 from urllib import urlencode
