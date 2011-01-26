@@ -2,13 +2,20 @@
 Python module for interacting with Gravatar.
 """
 __author__  = 'Eric Seidel'
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 __email__   = 'gridaphobe@gmail.com'
 
 from urllib import urlencode
 from urllib2 import urlopen
 from hashlib import md5
-import json
+
+try:
+    import json
+except ImportError:
+    try:
+        import simplejson as json
+    except ImportError:
+        from django.utils import simplejson as json
 
 BASE_URL        = 'http://www.gravatar.com/avatar/'
 SECURE_BASE_URL = 'https://secure.gravatar.com/avatar/'
