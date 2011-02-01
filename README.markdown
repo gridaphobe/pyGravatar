@@ -17,6 +17,7 @@ PyGravatar allows you to generate the URL for a gravatar, as well as retrieve
 the profile information stored online.
 
 <!-- highlight python -->
+
 	>>> from gravatar import Gravatar
 	>>> g = Gravatar('gridaphobe@gmail.com')
 	>>> g.thumb
@@ -27,6 +28,7 @@ the profile information stored online.
 
 	>>> g.emails
 	[{u'primary': u'true', u'value': u'gridaphobe@gmail.com'}]
+
 <!-- endhighlight -->
 
 You can also request a different size/rating thumbnail, use SSL, and change
