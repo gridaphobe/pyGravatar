@@ -9,7 +9,11 @@ will be helpful to some people.
 
 Install via pip
 
-	pip install pyGravatar
+<!-- highlight bash -->
+
+	$ pip install pyGravatar
+
+<!-- endhighlight -->
 
 ## Usage
 
@@ -34,16 +38,24 @@ the profile information stored online.
 You can also request a different size/rating thumbnail, use SSL, and change
 the default thumb for emails that aren't registered.
 
+<!-- highlight python -->
+
 	>>> g.size = 512 # the largest accepted
 	>>> g.rating = 'x'
 	>>> g.secure = True
 	>>> g.thumb
 	'https://secure.gravatar.com/avatar/16b87da510d278999c892cdbdd55c1b6?s=512&r=x'
 
+<!-- endhighlight -->
+
 Or you can pack it all nicely into one line
+
+<!-- highlight python -->
 
 	>>> Gravatar('gridaphobe@gmail.com', secure=True, size=512, rating='x').thumb
 	'https://secure.gravatar.com/avatar/16b87da510d278999c892cdbdd55c1b6?s=512&r=x'
+
+<!-- endhighlight -->
 
 ## Author
 
