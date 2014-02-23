@@ -38,7 +38,7 @@ class Gravatar(object):
     
     def __init__(self, email, secure = False, rating = 'g', size = 80,
                  default = None):
-        self._email_hash = md5(email.strip().lower()).hexdigest()
+        self._email_hash = md5(email.strip().lower().encode()).hexdigest()
         self._secure     = secure
         self._rating     = rating
         self._size       = size
