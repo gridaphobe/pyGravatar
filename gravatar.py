@@ -5,8 +5,14 @@ __author__  = 'Eric Seidel'
 __version__ = '0.0.5'
 __email__   = 'gridaphobe@gmail.com'
 
-from urllib import urlencode
-from urllib2 import urlopen
+
+try:
+    from urllib import urlencode
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.parse import urlencode
+    from urllib.request import urlopen
+
 from hashlib import md5
 
 try:
