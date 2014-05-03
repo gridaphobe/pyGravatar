@@ -5,8 +5,14 @@ __author__  = 'Eric Seidel'
 __version__ = '0.0.5'
 __email__   = 'gridaphobe@gmail.com'
 
-from urllib import urlencode
-from urllib2 import urlopen
+
+try:
+    from urllib import urlencode
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.parse import urlencode
+    from urllib.request import urlopen
+
 from hashlib import md5
 
 try:
@@ -32,7 +38,7 @@ class Gravatar(object):
     
     def __init__(self, email, secure = False, rating = 'g', size = 80,
                  default = None):
-        self._email_hash = md5(email.strip().lower()).hexdigest()
+        self._email_hash = md5(email.strip().lower().encode()).hexdigest()
         self._secure     = secure
         self._rating     = rating
         self._size       = size
